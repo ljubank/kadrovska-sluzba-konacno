@@ -1,24 +1,89 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+﻿@section Scripts {
+    @Scripts.Render("~/Scripts/Skripta.js")
+    @Styles.Render("~/Scripts/style.css")
+}
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+
+    <div id="pocetakInfo">
+        <h3><b>Korisnik nije prijavljen na sistem</b></h3>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    <div id="pocetakButtons" class="form-group">
+        <button style="background-color:yellow ; color: black" class="btn btn-default" id="btnPrijava">Prijava</button>
+        <button style="color: black" class="btn btn-default" id="btnRegistracija">Registracija</button>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+
+    <div class="col-sm-4" id="registracijaDiv" style="display:none">
+        <form method="post" action="post/" id="registracija">
+            <h3 style="margin-left: 60px"><b>Registracija korisnika</b></h3>
+            <div class="form-group">
+                <label>E-mail adresa:</label>
+                <input class="form-control" type="text" id="regEmail" />
+            </div>
+            <div class="form-group">
+                <label>Lozinka:</label>
+                <input class="form-control" type="password" id="regLoz" />
+            </div>
+            <div class="form-group">
+                <button style="background-color:yellow ; color: black" type="submit" class="btn btn-default">Registracija</button>
+            </div>
+        </form>
+        <button style="color: black" class="btn btn-default" id="btnOdustajanjeRegistracija">Odustajanje</button>
+    </div>
+
+    <div class="col-sm-4" id="prijavaDiv" style="display:none">
+        <form method="post" action="post/" id="prijava">
+            <h3 style="margin-left: 90px"><b>Prijava korisnika</b></h3>
+            <div class="form-group">
+                <label>E-mail adresa:</label>
+                <input class="form-control" type="text" id="priEmail" />
+            </div>
+            <div class="form-group">
+                <label>Lozinka:</label>
+                <input class="form-control" type="password" id="priLoz" />
+            </div>
+            <div class="form-group">
+                <button style="background-color:yellow ; color: black" type="submit" class="btn btn-default">Prijava</button>
+            </div>
+        </form>
+        <button style="color: black" class="btn btn-default" id="btnOdustajanjePrijava">Odustajanje</button>
+    </div>
+
+    <div id="prijavljenDiv" style="display:none">
+        <p id="info"></p>
+        <button style="background-color:yellow ; color: black" class="btn btn-default" id="odjavise">Odjava</button>
+    </div>
+
+    <div id="formPretragaDiv" style="display:none">
+        <form method="post" action="post/" id="zaposleniPretragaForm">
+            <h3><b>Pretraga zaposlenih po plati</b></h3>
+            <p><label>Najmanje: <input type="number" min="250" max="10000" step="0.1" id="najmanje" /></label></p>
+            <p><label>Najvise: <input type="number" min="250" max="10000" step="0.1" id="najvise" /></label></p>
+            <p><button style="background-color:yellow ; color: black" type="submit" class="btn btn-default">Trazi</button></p>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div id="dataZaposleni">
+    </div>
+    <br />
+    <div id="formZaposleniDiv" style="display:none">
+        <form method="post" action="post/" id="zaposleniForm">
+            <h3><b>Dodavanje novog Zaposlenog</b></h3>
+            <p><label>Organizaciona jedinica: <select name="" id="zaposlenJedinica"></select></label></p>
+            <br />
+            <p><label>Rola: <input type="text" id="zaposlenRola"></label></p>
+            <br />
+            <p><label>Ime i prezime: <input type="text" id="zaposlenImeIPrezime"></label></p>
+            <br />
+            <p><label>Godina rodjenja: <input type="number" min="1960" max="1999" id="zaposlenGodinaRodjenja" /></label></p>
+            <br />
+            <p><label>Godina zaposlenja: <input type="number" min="2010" max="2019" id="zaposlenGodinaZaposlenja" /></label></p>
+            <br />
+            <p><label>Plata: <input type="number" min="250" max="10000" step="0.1" id="zaposlenPlata" /></label></p>
+            <br />
+            <p><button style="background-color:yellow ; color: black" type="submit" class="btn btn-default">Dodavanje</button></p>
+        </form>
+        <button id="btnOdustajanjeForm" class="btn btn-default" style="color:black">Odustajanje</button>
     </div>
 </div>
