@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using KadrovskaSluzbaKonacno.Interfaces;
+using KadrovskaSluzbaKonacno.Repository;
+using KadrovskaSluzbaKonacno.Resolver;
 using Microsoft.Owin.Security.OAuth;
+using Microsoft.Practices.Unity;
 using Newtonsoft.Json.Serialization;
 
 namespace KadrovskaSluzbaKonacno
@@ -25,6 +30,16 @@ namespace KadrovskaSluzbaKonacno
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // Unity
+            var container = new UnityContainer();
+            container.RegisterType<IJedinicaRepository, JedinicaRepository>(new HierarchicalLifetimeManager());
+            container.RegisterType<IZaposlenRepository, ZaposlenRepository>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
+
+            // CORS
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
         }
     }
 }
